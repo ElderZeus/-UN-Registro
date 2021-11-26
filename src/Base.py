@@ -19,7 +19,7 @@ class Stack:
 
     def get(self):
         return self.items.pop() 
-    
+
 class Queue:
     def __init__(self):
         self.head = None
@@ -214,7 +214,6 @@ while user == True:
     print("4. Vender")   
     print("5. Buscar elemento")
     print("6. Mostrar elementos")
-    print("0. Salir")
     print("Inserte operacion a realizar: ", end='')
     op = int(input())
     try:
