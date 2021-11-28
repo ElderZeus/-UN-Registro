@@ -16,11 +16,17 @@ class Stack:
     def isEmpty(self):
         return self.items == []
 
-    def add(self, item):
+    def push(self, item):
         self.items.append(item)
 
-    def get(self):
-        return self.items.pop() 
+    def pop(self):
+        return self.items.pop()
+
+    def top(self):
+        return self.items[len(self.items)-1]
+
+    def size(self):
+        return len(self.items)
 
 class Queue:
     def __init__(self):
@@ -199,9 +205,7 @@ def Operation(operation, Li):
     elif operation == 6:
         Li.print()
     
+
     else:
         print("Ha ingresado un valor erroneo")
-    
-#Historial para las ultimas interacciones
-def historic(op):
-    return None   
+      
