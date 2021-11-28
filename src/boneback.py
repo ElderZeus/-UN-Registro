@@ -8,7 +8,7 @@ class Node:
         self.expenses = 0
         self.income = 0
         self.next = None 
-        
+        1
 class Stack:
     def __init__(self):
         self.items = []
@@ -65,32 +65,72 @@ class LinkedList:
     def print(self):                
         i = self.head
         while i != None:
-            print("Nombre: " + str(i.data) + " Inventario: " + str(i.num) + " Costo: " + str(i.expenses) + " Ingresos:" + str(i.income))
+            print("Nombre: " + str(i.data) + " Inventario: " + str(i.num) + 
+                  " Costo: " + str(i.expenses) + " Ingresos:" + str(i.income) 
+                  + " Beneficios: " + str(i.income-i.expenses))
             i = i.next
         print()
+
+#Agrega elemento teniendo en cuenta la unicidad               
+    def add(self,key):
+        nodo = Node(key)
+        curr = self.head        
+        if curr == None:
+            self.head = nodo
+            self.tail = nodo
+            return       
+        while curr.next != None:
+            if curr.data != key:
+                curr = curr.next                
+            elif curr.data == key:
+                print("el elemento ya existe, no se agrego")
+                return
+        if curr.data == key:  
+            print("el elemento ya existe, no se agrego")
+            return
+        else:    
+            curr.next = nodo
+            self.tail = nodo
+        print("La operacion se realizo con exito")                            
+        
 
 #Elimina el objeto si este existe, falta considerar los elementos en inventario:        
     def delete(self, key):
         curr = self.head
         prev = None
-        if curr.data == None:
-            return
+        
+        #Lista vacia
+        if curr == None:
+            return print("la lista esta vacia, no se puede eliminar elementos")
+         
+        #El elemento a borrar es el unico de la lista        
+        if curr.next == None:
+            if curr.data == key:
+                self.head = None
+                self.tail = None
+                return print("El elemento se ha eliminado, la lista esta vacia")
+  
+        #El elemento a borrar es la cabeza de la lista
         if curr != None and curr.data == key:
             self.head = curr.next
-            return self.delete(key);
+            return print("El elemento ha sido eliminado con exito")
         
+        #Itera la lista
         while curr!= self.tail and curr.next!= None:
             if curr.data != key:
                 prev = curr
                 curr = curr.next
+            #Borra el elemento    
             else: 
                 curr = curr.next
                 prev.next = curr
-                return
+                return print("El elemento ha sido eliminado con exito")
         
-        if curr == self.tail and curr == key:
+        #El elemento a borrar es la cola
+        if curr == self.tail and curr.data == key:
             self.tail = prev
-            self.tail.next = None    
+            self.tail.next = None
+            print("El elemento ha sido eliminado con exito")    
         else:
             print("El elemento no existe")
     
@@ -99,8 +139,12 @@ class LinkedList:
         curr = self.head
         while curr:
             if curr.data == key:
-                print("Nombre: " + str(curr.data) + " Inventario: " + str(curr.num) + " Costo: " + str(curr.expenses) + " Ingreso: " + str(curr. income))
+                print("Nombre: " + str(curr.data) + " Inventario: " + str(curr.num) +
+                       " Costo: " + str(curr.expenses) + " Ingreso: " + str(curr. income) + 
+                       " Beneficios: " + str(curr.income-curr.expenses))
                 return
+            else:
+                return print("El elemento no existe")
             
 #Busca el nombre como clave y modifica los atributos                  
     def buy(self,key,num, price):
@@ -141,24 +185,6 @@ class LinkedList:
                 curr = curr.next               
         return print("la operacion no es posible")            
                 
-#Agrega elemento teniendo en cuenta la unicidad               
-    def add(self,key):
-        nodo = Node(key)
-        curr = self.head        
-        if curr == None:
-            self.head = nodo
-            self.tail = nodo
-            return       
-        while curr != self.tail:
-            if curr.data != key:
-                curr = curr.next                
-            elif curr.data == key:
-                print("el elemento ya existe, no se agrego")
-                return       
-        curr.next = nodo
-        self.tail = nodo
-        print("La operacion se realizo con exito")                            
-        
 
 #Switch Case para operacion
 def Operation(operation, Li):
@@ -204,8 +230,6 @@ def Operation(operation, Li):
             
     elif operation == 6:
         Li.print()
-    
-
+            
     else:
-        print("Ha ingresado un valor erroneo")
-      
+        print("Ha ingresado un valor erroneo")      
